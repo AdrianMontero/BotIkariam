@@ -46,6 +46,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jmiEdificios = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -62,6 +63,20 @@ public class JFPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Gestor edificios");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
+
+        jmiEdificios.setText("Listas de construccion");
+        jmiEdificios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiEdificiosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmiEdificios);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Ejercito");
@@ -100,6 +115,16 @@ public class JFPrincipal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void jmiEdificiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEdificiosActionPerformed
+        
+        JPEdificios jPEdificios = new JPEdificios();
+        this.setContentPane(jPEdificios);
+    }//GEN-LAST:event_jmiEdificiosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,5 +173,6 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jmiEdificios;
     // End of variables declaration//GEN-END:variables
 }
