@@ -47,7 +47,7 @@ public class CoreBD {
     public void conectarSqlite() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection("jdbc:mysql://greenmonster.servehttp.com:3306/ikariam","root", "grmtoor");
+            conexion = DriverManager.getConnection("jdbc:mysql://greenmonster.servehttp.com:3306/ikariam","bot", "grmtoor");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CoreBD.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Problema para encontar la BBDD");

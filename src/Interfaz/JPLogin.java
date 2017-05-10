@@ -5,7 +5,9 @@
  */
 package Interfaz;
 
+import Core.Bot;
 import java.awt.List;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +24,7 @@ import org.openqa.selenium.support.ui.Select;
 public class JPLogin extends javax.swing.JPanel {
     WebDriver driverLog = JFPrincipal.driverFull;
     java.util.List<WebElement> listaServers;
+    Bot miBot = new Bot();
     /**
      * Creates new form JPLogin
      */
@@ -110,6 +113,12 @@ public class JPLogin extends javax.swing.JPanel {
 
     private void jbntConectarLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbntConectarLogActionPerformed
         conectar();
+        System.out.println("Respuesta sobre ciudades: " + miBot.askCitiesIka());
+        try {
+            System.out.println("Respuesta sobre ciudades en bd: " + miBot.askCitiesBD());
+        } catch (SQLException ex) {
+            Logger.getLogger(JPLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jbntConectarLogActionPerformed
 
     public void conectar(){

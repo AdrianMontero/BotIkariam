@@ -14,7 +14,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
  * @author ADRIAN
  */
 public class JFPrincipal extends javax.swing.JFrame {
-    static WebDriver driverFull;
+    public static WebDriver driverFull;
     /**
      * Creates new form JFPrincipal
      */
