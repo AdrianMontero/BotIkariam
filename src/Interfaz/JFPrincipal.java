@@ -5,6 +5,8 @@
  */
 package Interfaz;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -122,7 +124,12 @@ public class JFPrincipal extends javax.swing.JFrame {
 
     private void jmiEdificiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEdificiosActionPerformed
         
-        JPEdificios jPEdificios = new JPEdificios();
+        JPEdificios jPEdificios = null;
+        try {
+            jPEdificios = new JPEdificios();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(JFPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.setContentPane(jPEdificios);
     }//GEN-LAST:event_jmiEdificiosActionPerformed
 

@@ -15,6 +15,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Sleeper;
 
 /**
  *
@@ -31,7 +32,7 @@ public class Bot {
     /*EDIFICIOS*/
     
     /**
-     * Guarda un edificio en la base de datos
+     * Guarda un edificio en la base de datos (uso desde toda la web)
      *
      * @param miEdificio Objeto del tipo edificio relleno
      * @throws SQLException Error al guardar el edificio en la base de datos
@@ -47,10 +48,10 @@ public class Bot {
 
 
     /**
-     * Devuelve la lista completa de los edificios que hay en la lista de construccion
-     * @param islandId
-     * @return
-     * @throws SQLException 
+     * Devuelve la lista completa de los edificios que hay en la lista de construccion (uso desde toda la web)
+     * @param islandId Isla de la cual queremos encontrar los edificios en cola
+     * @return ArrayList de tipo Edificio conteniendo todos los edificios en la isla para ese id
+     * @throws SQLException Error al recuperar la lista de edificios de la isla.
      */
     public ArrayList<Edificio> ListBuilds4Island(int islandId) throws SQLException {
         ArrayList<Edificio> misEdificios = new ArrayList();
@@ -70,8 +71,57 @@ public class Bot {
 
     /*CIUDADES*/
     
+    public Ciudad setInfoCities() throws InterruptedException{
+        //Nos posicionamos en la ventana de isla (es donde esta dota la informacion que necesitamos)
+        WebElement btnIsla = driverBot.findElement(By.className("city_nav_button viewIsland"));
+        btnIsla.click();
+        
+        Thread.sleep(1000); //Una vez en ella esperamos.
+        
+        //Camturamos toda la informacion de la ciudad necesaria para guardar en la BD
+        WebElement contCordX = driverBot.findElement(By.id("inputXCoord"));
+        WebElement contCordY = driverBot.findElement(By.id("inputYCoord"));
+        WebElement woodCity = driverBot.findElement(By.id("js_GlobalMenu_wood"));
+        WebElement wineCity = driverBot.findElement(By.id("js_GlobalMenu_wine"));
+        WebElement marbleCity = driverBot.findElement(By.id("js_GlobalMenu_marble"));
+        WebElement crystalCity = driverBot.findElement(By.id("js_GlobalMenu_crystal"));
+        WebElement sulfurCity = driverBot.findElement(By.id("js_GlobalMenu_sulfur"));
+        
+        //Tranformamos los String en int
+        int cordX = Integer.parseInt(contCordX.getText());
+        int cordY = Integer.parseInt(contCordY.getText());
+        int wood = Integer.parseInt(woodCity.getText());
+        int wine = Integer.parseInt(wineCity.getText());
+        int marble = Integer.parseInt(marbleCity.getText());
+        int crystal = Integer.parseInt(crystalCity.getText());
+        int sulfur = Integer.parseInt(sulfurCity.getText());
+        
+        //Guardamos y mandamos la informacion
+        Ciudad miCiudad = new Ciudad("nombreX", cordX, cordY, wood, wine, marble, crystal, sulfur);
+        return miCiudad;
+    }
+    
+    public void lookCities() throws InterruptedException{
+        //Click en el desplegable de las ciudades
+        WebElement desplegableIslas = driverBot.findElement(By.id("js_citySelectContainer"));
+
+        Thread.sleep(10); //Despues de hacer click esperamos 10 milisegundos
+        
+        List<WebElement> islas = driverBot.findElements(By.className("ownCity")); //Capturamos los elementos desplegados en el menu
+
+        for (int i = 1; i < islas.size(); i++) { //Por cada elemento...
+            desplegableIslas.click();
+            Thread.sleep(1000);
+            islas = driverBot.findElements(By.className("ownCity")); //Capturamos los elementos desplegados en el menu (necesario repetirlo para que no se quede bug)
+            Thread.sleep(1000);
+            islas.get(i).click();
+            Thread.sleep(1000);
+        }
+        desplegableIslas.click();
+    }
+    
     /**
-     * Devuelve el numero de ciudades que hay guardadas en el servidor
+     * Devuelve el numero de ciudades que hay guardadas en el servidor (uso desde toda la web)
      * @return numero de ciudades en el servidor
      * @throws SQLException Error al ejecutar el sql de recuento de ciudades 
      */
@@ -85,6 +135,10 @@ public class Bot {
         return nCities; //En caso de dar 100 significa que algo falla.
     }
     
+    /**
+     * Devuelve el numero de islas que hay en ikariam (uso desde toda la web)
+     * @return 
+     */
     public int askCitiesIka(){
         int nCities;
         //WebElement desplegableIslas = driverBot.findElement(By.id("js_citySelectContainer")); //Seleccionamos el desplegable de las islas
@@ -95,7 +149,7 @@ public class Bot {
     }
     
     /**
-     * Guarda una ciudad en la base de datos
+     * Guarda una ciudad en la base de datos (uso desde toda la web)
      *
      * @param miCiudad Ciudad a guardar (con los datos rellenos)
      * @throws SQLException Error al insertar la ciudad en la BD.
@@ -115,7 +169,7 @@ public class Bot {
     }
 
     /**
-     * Metodo que devuelve la lista de ciudades del jugador con toda su informacion
+     * Metodo que devuelve la lista de ciudades del jugador con toda su informacion (uso desde toda la web)
      * @return ArrayList del tipo ciudad con toda la informacion completa
      * @throws SQLException Error al recuperar la informacion de las ciudades
      */

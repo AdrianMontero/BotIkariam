@@ -10,6 +10,7 @@ package Objetos;
  * @author ADRIAN
  */
 public class Ciudad {
+
     private int idCiudad;
     private String nombreCiu;
     private int coordXCiu;
@@ -19,9 +20,8 @@ public class Ciudad {
     private int marmolCiu;
     private int cristalCiu;
     private int azufreCiu;
-    
-    //Getters y setters
 
+    //Getters y setters
     public int getIdCiudad() {
         return idCiudad;
     }
@@ -93,10 +93,8 @@ public class Ciudad {
     public void setAzufreCiu(int azufreCiu) {
         this.azufreCiu = azufreCiu;
     }
-    
-    
-    //Constructores
 
+    //Constructores
     public Ciudad(int idCiudad, String nombreCiu, int coordXCiu, int coordYCiu, int maderaCiu, int vinoCiu, int marmolCiu, int cristalCiu, int azufreCiu) {
         this.idCiudad = idCiudad;
         this.nombreCiu = nombreCiu;
@@ -109,6 +107,19 @@ public class Ciudad {
         this.azufreCiu = azufreCiu;
     }
 
+    public Ciudad(String nombreCiu, int coordXCiu, int coordYCiu, int maderaCiu, int vinoCiu, int marmolCiu, int cristalCiu, int azufreCiu) {
+        this.nombreCiu = nombreCiu;
+        this.coordXCiu = coordXCiu;
+        this.coordYCiu = coordYCiu;
+        this.maderaCiu = maderaCiu;
+        this.vinoCiu = vinoCiu;
+        this.marmolCiu = marmolCiu;
+        this.cristalCiu = cristalCiu;
+        this.azufreCiu = azufreCiu;
+    }
+    
+    
+
     public Ciudad(int idCiudad, int maderaCiu, int vinoCiu, int marmolCiu, int cristalCiu, int azufreCiu) {
         this.idCiudad = idCiudad;
         this.maderaCiu = maderaCiu;
@@ -120,5 +131,5 @@ public class Ciudad {
 
     public Ciudad() {
     }
-    
+
 }

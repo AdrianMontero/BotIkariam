@@ -9,7 +9,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 
 /**
  *
@@ -32,10 +31,10 @@ public class JPEdificios extends javax.swing.JPanel {
         List<WebElement> islas = driverEdi.findElements(By.className("ownCity"));
         //System.out.println(islas.get(3).getText());
 
-        System.out.println("Cargando ciudades en panel...");
         for (int i = 1; i < islas.size(); i++) {
             jcbCiudadPEdif.addItem(islas.get(i).getText());
         }
+        desplegableIslas.click();
     }
 
     /**

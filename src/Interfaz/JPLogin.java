@@ -22,9 +22,11 @@ import org.openqa.selenium.support.ui.Select;
  * @author ADRIAN
  */
 public class JPLogin extends javax.swing.JPanel {
+
     WebDriver driverLog = JFPrincipal.driverFull;
     java.util.List<WebElement> listaServers;
     Bot miBot = new Bot();
+
     /**
      * Creates new form JPLogin
      */
@@ -112,7 +114,16 @@ public class JPLogin extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbntConectarLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbntConectarLogActionPerformed
+        //Nos logueamos
         conectar();
+
+        try {
+            miBot.lookCities();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(JPLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //Pruebas
         System.out.println("Respuesta sobre ciudades: " + miBot.askCitiesIka());
         try {
             System.out.println("Respuesta sobre ciudades en bd: " + miBot.askCitiesBD());
@@ -121,27 +132,27 @@ public class JPLogin extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jbntConectarLogActionPerformed
 
-    public void conectar(){
+    public void conectar() {
         //Parametros que almacenan los datos introducidos por el usuario
         int servSelecIndex = jcbServerList.getSelectedIndex();
         String user = jtfUserLog.getText();
         String pass = jtfPassLog.getText();
-        
+
         //Elementos de la web
         WebElement ddServersLog = driverLog.findElement(By.id("logServer"));
         Select select = new Select(ddServersLog);
         WebElement UserLog = driverLog.findElement(By.id("loginName"));
         WebElement PassLog = driverLog.findElement(By.id("loginPassword"));
         WebElement btnLogin = driverLog.findElement(By.id("loginBtn"));
-        
+
         //Asignacion de parametros del usuario con elementos de la web
         select.selectByIndex(servSelecIndex);
         UserLog.sendKeys(jtfUserLog.getText());
         PassLog.sendKeys(jtfPassLog.getText());
-        
+
         //Entrando
         btnLogin.click();
-       
+
     }
 
     public void cargarLog() throws InterruptedException {
@@ -150,25 +161,25 @@ public class JPLogin extends javax.swing.JPanel {
 
         //Nos conectamos a la web
         driverLog.get("https://es.ikariam.gameforge.com/index.php?logout=1");
-        
+
         //Eliminamos pop-up si existe
         driverLog.navigate().refresh();
-        
+
         //Clicamos en elboton de login
         WebElement btnLogin = driverLog.findElement(By.id("btn-login"));
         btnLogin.click();
-        
+
         //Seleccionamos un mundo
         WebElement ddServersLog = driverLog.findElement(By.id("logServer"));
         Select select = new Select(ddServersLog);
-        
+
         listaServers = select.getOptions();
-        for(int i = 0; i < listaServers.size();i++){
+        for (int i = 0; i < listaServers.size(); i++) {
             jcbServerList.addItem(listaServers.get(i).getText());
         }
     }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbntConectarLog;
     private javax.swing.JComboBox<String> jcbServerList;
