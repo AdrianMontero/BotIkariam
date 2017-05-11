@@ -116,6 +116,9 @@ public class JPLogin extends javax.swing.JPanel {
     private void jbntConectarLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbntConectarLogActionPerformed
         //Nos logueamos
         conectar();
+        int ciudadesIkariam;
+        int ciudadesBD;
+        int diferenciaCiudadesIkaBD; //Almacena cuantas ciudades de diferencia hay entre la BD e ikariam
 
         try {
             miBot.lookCities();
@@ -124,12 +127,32 @@ public class JPLogin extends javax.swing.JPanel {
         }
 
         //Pruebas
-        System.out.println("Respuesta sobre ciudades: " + miBot.askCitiesIka());
+        
         try {
-            System.out.println("Respuesta sobre ciudades en bd: " + miBot.askCitiesBD());
+            //Vemos cuantas islas hay en la BD y cuantas hay actualmente en ikariam
+            ciudadesIkariam = miBot.askCitiesIka();
+            ciudadesBD = miBot.askCitiesBD();
+            
+            if(ciudadesBD != ciudadesIkariam){
+                diferenciaCiudadesIkaBD = ciudadesIkariam - ciudadesBD;
+                for(int i = 0; i < diferenciaCiudadesIkaBD; i++){
+                    ciudadesBD++; 
+                    
+                    //Guardamos las ciudades que no tenemos en la BD
+                    try {
+                        miBot.lookCity(ciudadesBD);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(JPLogin.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    
+                } 
+            }
         } catch (SQLException ex) {
             Logger.getLogger(JPLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
     }//GEN-LAST:event_jbntConectarLogActionPerformed
 
     public void conectar() {
@@ -146,9 +169,12 @@ public class JPLogin extends javax.swing.JPanel {
         WebElement btnLogin = driverLog.findElement(By.id("loginBtn"));
 
         //Asignacion de parametros del usuario con elementos de la web
-        select.selectByIndex(servSelecIndex);
-        UserLog.sendKeys(jtfUserLog.getText());
-        PassLog.sendKeys(jtfPassLog.getText());
+        //select.selectByIndex(servSelecIndex);
+        select.selectByIndex(11);
+        //UserLog.sendKeys(jtfUserLog.getText());
+        UserLog.sendKeys("blizzartess");
+        //PassLog.sendKeys(jtfPassLog.getText());
+        PassLog.sendKeys("");
 
         //Entrando
         btnLogin.click();
