@@ -7,11 +7,13 @@ package Interfaz;
 
 import Core.Bot;
 import Objetos.Construccion;
+import Objetos.Edificio;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,6 +23,9 @@ import org.openqa.selenium.WebElement;
  * @author ADRIAN
  */
 public class JPEdificios extends javax.swing.JPanel {
+    ArrayList<Construccion> construccionesParamiIsla = new ArrayList();
+    Construccion construccionASubir;
+    DefaultTableModel model;
 
     java.util.List<WebElement> listaCiudadesPJ;
     WebDriver driverEdi = JFPrincipal.driverFull;
@@ -30,6 +35,8 @@ public class JPEdificios extends javax.swing.JPanel {
      */
     public JPEdificios() throws InterruptedException {
         initComponents();
+        DefaultTableModel model = (DefaultTableModel) jtaEdificios.getModel();
+        model.setRowCount(0); //Limpiamos la tabla de ciudad/edificio
         WebElement desplegableIslas = driverEdi.findElement(By.id("js_citySelectContainer"));
         desplegableIslas.click();
 
@@ -58,7 +65,7 @@ public class JPEdificios extends javax.swing.JPanel {
         jlAnadirEdifPEdif = new javax.swing.JLabel();
         jlEliminarEdificioPEdif = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtaEdificios = new javax.swing.JTable();
         jbtnAddPEdif = new javax.swing.JButton();
         jbtndelPEdif1 = new javax.swing.JButton();
 
@@ -74,28 +81,36 @@ public class JPEdificios extends javax.swing.JPanel {
             }
         });
 
-        jcbEdificioElimPEdif.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jlAnadirEdifPEdif.setText("Añadir Edificio");
 
         jlEliminarEdificioPEdif.setText("Eliminar Edificio");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtaEdificios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Ciudad", "Edificio"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtaEdificios);
 
         jbtnAddPEdif.setText("Añadir");
+        jbtnAddPEdif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAddPEdifActionPerformed(evt);
+            }
+        });
 
         jbtndelPEdif1.setText("Eliminar");
+        jbtndelPEdif1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtndelPEdif1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -152,15 +167,34 @@ public class JPEdificios extends javax.swing.JPanel {
     private void jcbCiudadPEdifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCiudadPEdifActionPerformed
         Bot miBot = new Bot();
         ArrayList<Construccion> misConstrucciones = new ArrayList();
+        ArrayList<Edificio> misEdificios = new ArrayList();
+        
+        //Funcionalidades para la parte de "Añadir"
         try {
-            misConstrucciones = miBot.getConstruccionesPorCiudad(jcbCiudadPEdif.getSelectedIndex() + 1);
-                jcbEdificioAddPEdif.removeAllItems();
-            for(int i = 0;i < misConstrucciones.size(); i++){
-               jcbEdificioAddPEdif.addItem(misConstrucciones.get(i).getNombreConstruccion()); 
+            misConstrucciones = miBot.getConstruccionesPorCiudad(jcbCiudadPEdif.getSelectedIndex() + 1); //Guardamos en misConstrucciones Las construcciones seleccionadas
+                jcbEdificioAddPEdif.removeAllItems(); //Quitamos las construcciones que pudiesen estar cargadas
+            for(int i = 0;i < misConstrucciones.size(); i++){ //Por cada construccion en la isla...
+               jcbEdificioAddPEdif.addItem(misConstrucciones.get(i).getNombreConstruccion()); //Añadimos su nombre en el combobox de Añadir
+            }
+            construccionesParamiIsla = misConstrucciones; //Guardamos en "construccionesParamiIsla" las construcciones seleccionadas para esta isla
+        } catch (SQLException ex) {
+            Logger.getLogger(JPEdificios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        //Funcionalidades para la parte de Eliminar
+        try { 
+            misEdificios = miBot.getEdificiosPorCiudad(jcbCiudadPEdif.getSelectedIndex() + 1);
+            jcbEdificioElimPEdif.removeAllItems(); //Borramos los edificios que pudiera haber
+            for(int i = 0;i < misEdificios.size(); i++){ //Por cada edificio en la isla...
+               jcbEdificioElimPEdif.addItem(misEdificios.get(i).getNombreEdificio()); //Añadimos su nombre en el combobox de Añadir
             }
         } catch (SQLException ex) {
             Logger.getLogger(JPEdificios.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        //jcbEdificioElimPEdif
+        
         
     }//GEN-LAST:event_jcbCiudadPEdifActionPerformed
 
@@ -168,10 +202,33 @@ public class JPEdificios extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbEdificioAddPEdifActionPerformed
 
+    private void jbtnAddPEdifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAddPEdifActionPerformed
+        for(int i = 0; i < construccionesParamiIsla.size();i++){ //Cuando entre las construcciones para esta isla encontremos la que a seleccionado el usuario
+            if(construccionesParamiIsla.get(i).getNombreConstruccion().equals(jcbEdificioAddPEdif.getSelectedItem().toString())){
+                construccionASubir = construccionesParamiIsla.get(i); //La asignamos a construcciones a subir
+                break;//salimos del for
+            }//Posible error aqui
+        }
+        //Guardamos la construccion en la tabla de Edificios de la BD (asignada para las construcciones que queremos subir
+        Edificio miEdificio = new Edificio(construccionASubir.getNombreConstruccion(), construccionASubir.getIdCiudad(), construccionASubir.getPosIkaCon());
+        Bot miBot = new Bot();
+        model = (DefaultTableModel) jtaEdificios.getModel();
+        model.addRow(new Object[]{(int) construccionASubir.getIdCiudad(), (String) construccionASubir.getNombreConstruccion()});
+        try {
+            miBot.setEdificioBD(miEdificio); //Guardamos el edificio en la BD para que se ponga a la cola.
+        } catch (SQLException ex) {
+            Logger.getLogger(JPEdificios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jbtnAddPEdifActionPerformed
+
+    private void jbtndelPEdif1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtndelPEdif1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtndelPEdif1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbtnAddPEdif;
     private javax.swing.JButton jbtndelPEdif1;
     private javax.swing.JComboBox<String> jcbCiudadPEdif;
@@ -179,5 +236,6 @@ public class JPEdificios extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jcbEdificioElimPEdif;
     private javax.swing.JLabel jlAnadirEdifPEdif;
     private javax.swing.JLabel jlEliminarEdificioPEdif;
+    private javax.swing.JTable jtaEdificios;
     // End of variables declaration//GEN-END:variables
 }

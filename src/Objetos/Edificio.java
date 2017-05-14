@@ -90,6 +90,13 @@ public class Edificio {
         this.posIkaEdi = posIkaEdi;
     }
 
+    public Edificio(String nombreEdificio, int idCiudad, String posIkaEdi) {
+        this.nombreEdificio = nombreEdificio;
+        this.idCiudad = idCiudad;
+        this.posIkaEdi = posIkaEdi;
+    }
+    
+
     public Edificio() {
     }
 }
