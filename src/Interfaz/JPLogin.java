@@ -6,6 +6,8 @@
 package Interfaz;
 
 import Core.Bot;
+import Objetos.Ciudad;
+import Objetos.Edificio;
 import java.awt.List;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,7 +27,8 @@ public class JPLogin extends javax.swing.JPanel {
 
     WebDriver driverLog = JFPrincipal.driverFull;
     java.util.List<WebElement> listaServers;
-    Bot miBot = new Bot();
+    Ciudad gestorCiudad = new Ciudad();
+    Edificio gestorEdificio = new Edificio();
 
     /**
      * Creates new form JPLogin
@@ -116,22 +119,22 @@ public class JPLogin extends javax.swing.JPanel {
     private void jbntConectarLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbntConectarLogActionPerformed
         //Nos logueamos
         conectar();
+        Bot miBot = new Bot();
         int ciudadesIkariam;
         int ciudadesBD;
         int diferenciaCiudadesIkaBD; //Almacena cuantas ciudades de diferencia hay entre la BD e ikariam
 
-        try {
-            miBot.lookCities();
+        /*try {
+            gestorCiudad.lookCities();
         } catch (InterruptedException ex) {
             Logger.getLogger(JPLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
 
-        //Pruebas
-        
+        //Al inicio capturamos la informacion de todoas las ciudades y edificios de esa ciudad que hay en Ikariam que todavia no estan en la BD          
         try {
             //Vemos cuantas islas hay en la BD y cuantas hay actualmente en ikariam
-            ciudadesIkariam = miBot.askCitiesIka();
-            ciudadesBD = miBot.askCitiesBD();
+            ciudadesIkariam = gestorCiudad.askCitiesIka();
+            ciudadesBD = gestorCiudad.askCitiesBD();
             
             if(ciudadesBD != ciudadesIkariam){
                 diferenciaCiudadesIkaBD = ciudadesIkariam - ciudadesBD;
@@ -140,7 +143,8 @@ public class JPLogin extends javax.swing.JPanel {
                     
                     //Guardamos las ciudades que no tenemos en la BD
                     try {
-                        miBot.lookCity(ciudadesBD);
+                        gestorCiudad.stockCity(ciudadesBD); //Guardamos la informacion perteneciente a esa ciudad
+                        miBot.setConstruccionesPorCiudad(ciudadesBD); //Guardamos los edificios pertenecientes a esa ciudad
                     } catch (InterruptedException ex) {
                         Logger.getLogger(JPLogin.class.getName()).log(Level.SEVERE, null, ex);
                     }

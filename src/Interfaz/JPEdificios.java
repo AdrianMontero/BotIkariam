@@ -5,7 +5,13 @@
  */
 package Interfaz;
 
+import Core.Bot;
+import Objetos.Construccion;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -62,7 +68,11 @@ public class JPEdificios extends javax.swing.JPanel {
             }
         });
 
-        jcbEdificioAddPEdif.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbEdificioAddPEdif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEdificioAddPEdifActionPerformed(evt);
+            }
+        });
 
         jcbEdificioElimPEdif.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -101,10 +111,10 @@ public class JPEdificios extends javax.swing.JPanel {
                                 .addComponent(jbtnAddPEdif, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbtndelPEdif1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jcbEdificioAddPEdif, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jcbEdificioElimPEdif, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jcbEdificioAddPEdif, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jcbEdificioElimPEdif, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
                                 .addComponent(jlAnadirEdifPEdif)
@@ -140,8 +150,23 @@ public class JPEdificios extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbCiudadPEdifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCiudadPEdifActionPerformed
-        // TODO add your handling code here:
+        Bot miBot = new Bot();
+        ArrayList<Construccion> misConstrucciones = new ArrayList();
+        try {
+            misConstrucciones = miBot.getConstruccionesPorCiudad(jcbCiudadPEdif.getSelectedIndex() + 1);
+                jcbEdificioAddPEdif.removeAllItems();
+            for(int i = 0;i < misConstrucciones.size(); i++){
+               jcbEdificioAddPEdif.addItem(misConstrucciones.get(i).getNombreConstruccion()); 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPEdificios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jcbCiudadPEdifActionPerformed
+
+    private void jcbEdificioAddPEdifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEdificioAddPEdifActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbEdificioAddPEdifActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
