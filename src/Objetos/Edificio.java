@@ -34,6 +34,11 @@ public class Edificio {
     //Metodos 
     
     /*EDIFICIOS*/
+    public void eliminarEdificioBD(int nCiudad, String nombreEdi) throws SQLException{
+        sql = "Delete from edificios where id_ciu = " + nCiudad + " and nombre_edi = '" + nombreEdi + "' LIMIT 1";
+        bd.actualizarTabla(sql);
+    }
+    
 
 
     //Getters and setters

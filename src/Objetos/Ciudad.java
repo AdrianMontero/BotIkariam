@@ -164,7 +164,7 @@ public class Ciudad {
      * @return numero de ciudades en el servidor
      * @throws SQLException Error al ejecutar el sql de recuento de ciudades
      */
-    public int askCitiesBD() throws SQLException {
+    public int askNumberCitiesBD() throws SQLException {
         int nCities = 100; //Numero de ciudades almacenadas en el servidor
         sql = "SELECT count(id_ciu) AS 'ciudades' FROM ciudades";
         rs = bd.consultarTabla(sql);
@@ -215,22 +215,24 @@ public class Ciudad {
      * @return ArrayList del tipo ciudad con toda la informacion completa
      * @throws SQLException Error al recuperar la informacion de las ciudades
      */
-    public ArrayList<Ciudad> ListCitiesPlayerBD() throws SQLException {
+    public static ArrayList<Ciudad> ListCitiesPlayerBD() throws SQLException {
+        String sql2;
+        ResultSet rs2;
         ArrayList<Ciudad> misCiudades = new ArrayList();
         Ciudad miCiudad;
-        sql = "select * from ciudades";
-        rs = bd.consultarTabla(sql);
-        while (rs.next()) {
+        sql2 = "select * from ciudades";
+        rs2 = bd.consultarTabla(sql2);
+        while (rs2.next()) {
             miCiudad = new Ciudad();
-            miCiudad.setIdCiudad(rs.getInt("id_ciu"));
-            miCiudad.setNombreCiu(rs.getString("nombre_ciu"));
-            miCiudad.setCoordXCiu(rs.getInt("coord_x_ciu"));
-            miCiudad.setCoordYCiu(rs.getInt("coord_y_ciu"));
-            miCiudad.setMaderaCiu(rs.getInt("madera_ciu"));
-            miCiudad.setVinoCiu(rs.getInt("vino_ciu"));
-            miCiudad.setMarmolCiu(rs.getInt("marmol_ciu"));
-            miCiudad.setCristalCiu(rs.getInt("cristal_ciu"));
-            miCiudad.setCristalCiu(rs.getInt("azufre_ciu"));
+            miCiudad.setIdCiudad(rs2.getInt("id_ciu"));
+            miCiudad.setNombreCiu(rs2.getString("nombre_ciu"));
+            miCiudad.setCoordXCiu(rs2.getInt("coord_x_ciu"));
+            miCiudad.setCoordYCiu(rs2.getInt("coord_y_ciu"));
+            miCiudad.setMaderaCiu(rs2.getInt("madera_ciu"));
+            miCiudad.setVinoCiu(rs2.getInt("vino_ciu"));
+            miCiudad.setMarmolCiu(rs2.getInt("marmol_ciu"));
+            miCiudad.setCristalCiu(rs2.getInt("cristal_ciu"));
+            miCiudad.setCristalCiu(rs2.getInt("azufre_ciu"));
             misCiudades.add(miCiudad);
         }
         return misCiudades;

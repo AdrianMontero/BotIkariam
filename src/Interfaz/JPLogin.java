@@ -8,6 +8,7 @@ package Interfaz;
 import Core.Bot;
 import Objetos.Ciudad;
 import Objetos.Edificio;
+import Objetos.HiloPrincipal;
 import java.awt.List;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -134,7 +135,7 @@ public class JPLogin extends javax.swing.JPanel {
         try {
             //Vemos cuantas islas hay en la BD y cuantas hay actualmente en ikariam
             ciudadesIkariam = gestorCiudad.askCitiesIka();
-            ciudadesBD = gestorCiudad.askCitiesBD();
+            ciudadesBD = gestorCiudad.askNumberCitiesBD();
             
             if(ciudadesBD != ciudadesIkariam){
                 diferenciaCiudadesIkaBD = ciudadesIkariam - ciudadesBD;
@@ -152,6 +153,8 @@ public class JPLogin extends javax.swing.JPanel {
                     
                 } 
             }
+        //Una vez recogida la informacion que faltase perteneciente a las islas le indicamos al hilo principal del programa que empiece
+        new Thread(new HiloPrincipal()).start();
         } catch (SQLException ex) {
             Logger.getLogger(JPLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
