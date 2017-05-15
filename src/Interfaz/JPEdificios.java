@@ -61,6 +61,32 @@ public class JPEdificios extends javax.swing.JPanel {
             System.out.println("Error al intentar recoger las ciudades");
         }
     }
+    
+    
+    public void actualizarTablaTodos() throws SQLException{
+        Bot miBot = new Bot();
+        ArrayList<Edificio> misEdificios = new ArrayList();
+        model = (DefaultTableModel) jtaEdificios.getModel();
+        model.setColumnCount(0); //Limpiamos la tabla
+        misEdificios = miBot.getTolodLosEdificios(); //Obtenemos todos los edificios de la BD
+        for (Edificio edificio : misEdificios) { //Por cada edificio
+            model.addRow(new Object[]{(int) edificio.getIdCiudad(), (String) edificio.getNombreEdificio()}); //Lo agregamos a la caja
+        }
+        
+    }
+    
+    public void actualizarTablaCiudad(int nCiudad) throws SQLException{
+        Bot miBot = new Bot();
+        ArrayList<Edificio> misEdificios = new ArrayList();
+        model = (DefaultTableModel) jtaEdificios.getModel();
+        model.setRowCount(0); //Limpiamos la tabla
+        misEdificios = miBot.getEdificiosPorCiudad(nCiudad); //Obtenemos todos los edificios de la BD
+        for (Edificio edificio : misEdificios) { //Por cada edificio
+            model.addRow(new Object[]{(int) edificio.getIdCiudad(), (String) edificio.getNombreEdificio()}); //Lo agregamos a la caja
+        }
+        
+    }
+    
 
         /**
          * This method is called from within the constructor to initialize the
@@ -204,7 +230,11 @@ public class JPEdificios extends javax.swing.JPanel {
             Logger.getLogger(JPEdificios.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        //jcbEdificioElimPEdif
+        try {
+            actualizarTablaCiudad(jcbCiudadPEdif.getSelectedIndex() + 1);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPEdificios.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_jcbCiudadPEdifActionPerformed
 
@@ -224,8 +254,23 @@ public class JPEdificios extends javax.swing.JPanel {
         Bot miBot = new Bot();
         model = (DefaultTableModel) jtaEdificios.getModel();
         model.addRow(new Object[]{(int) construccionASubir.getIdCiudad(), (String) construccionASubir.getNombreConstruccion()});
+        
+        
         try {
             miBot.setEdificioBD(miEdificio); //Guardamos el edificio en la BD para que se ponga a la cola.
+        } catch (SQLException ex) {
+            Logger.getLogger(JPEdificios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        //Funcionalidad para la parte de Eliminar
+        ArrayList<Edificio> misEdificios = new ArrayList();
+        try {
+            misEdificios = miBot.getEdificiosPorCiudad(jcbCiudadPEdif.getSelectedIndex() + 1);
+            jcbEdificioElimPEdif.removeAllItems(); //Borramos los edificios que pudiera haber
+            for (int i = 0; i < misEdificios.size(); i++) { //Por cada edificio en la isla...
+                jcbEdificioElimPEdif.addItem(misEdificios.get(i).getNombreEdificio()); //Añadimos su nombre en el combobox de Añadir
+            }
         } catch (SQLException ex) {
             Logger.getLogger(JPEdificios.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -253,6 +298,13 @@ public class JPEdificios extends javax.swing.JPanel {
             Logger.getLogger(JPEdificios.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        
+        try {
+            //Actualizamos la tabla
+            actualizarTablaCiudad(jcbCiudadPEdif.getSelectedIndex() + 1);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPEdificios.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jbtndelPEdif1ActionPerformed
 
 

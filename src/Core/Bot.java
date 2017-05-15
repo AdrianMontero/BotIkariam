@@ -86,6 +86,24 @@ public class Bot {
         return misEdificios;
     }
     
+    public ArrayList<Edificio> getTolodLosEdificios() throws SQLException{
+        ArrayList<Edificio> misEdificios = new ArrayList();
+        Edificio miEdificio;
+        
+        sql = "select * from edificios order by 'id_edi'";
+        rs = bd.consultarTabla(sql);
+        
+        while(rs.next()){
+            miEdificio = new Edificio();
+            miEdificio.setIdEdificio(rs.getInt("id_edi"));
+            miEdificio.setNombreEdificio(rs.getString("nombre_edi"));
+            miEdificio.setIdCiudad(rs.getInt("id_ciu"));
+            miEdificio.setPosIkaEdi(rs.getString("pos_ika_edi"));
+            misEdificios.add(miEdificio);
+        }
+        return misEdificios;
+    }
+    
     public ArrayList<Construccion> getConstruccionesPorCiudad(int nCiudad) throws SQLException{
         ArrayList<Construccion> misConstrucciones = new ArrayList();
         Construccion miConstruccion;
