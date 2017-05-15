@@ -57,6 +57,7 @@ public class Bot {
         btnIsla.click();
     }
     
+    
     /**
      * Muestra la isla de la cuidad en la que nos ocupamos
      */

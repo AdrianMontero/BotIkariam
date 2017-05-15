@@ -6,15 +6,18 @@
 package Objetos;
 
 import Core.Bot;
+import Objetos.Ciudad;
 import Core.CoreBD;
 import Interfaz.JFPrincipal;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import java.util.ArrayList;
 
 /**
  *
@@ -55,10 +58,20 @@ public class HiloPrincipal extends Thread {
                     Thread.sleep(1000);
 
                     miCiudad = miCiudad.getInfoCity();//Guardamos la informacion de la isla (recursos, nombre y coordenadas)
-
+                    miCiudad.setIdCiudad(i); //Asignamos el id a la ciudad
+                    
                     //ACTUALIZAR EDIFICIOS ISLA
                     miBot.mostrarCiudad(); //Nos posicionamos en la ciudad para hacer las comprobaciones de los edificios.
                     System.out.println("Estoy en la ciudad  " + miCiudad.getNombreCiu());
+                    
+//                    ArrayList<Ciudad> misCiudades = new ArrayList();
+//                    misCiudades = Ciudad.ListCitiesPlayerBD();
+//                    for(int j = 0; j < misCiudades.size();i++){
+//                    }
+                    ArrayList<Edificio> misEdificios = new ArrayList(); //Constiene los edificios a construir almacenados en la BD
+                    misEdificios = miBot.getEdificiosPorCiudad(i); //Conseguimos la lista de edificios por ciudad de la BD
+                    
+                    actualizarRecursos(miCiudad); //Guardamos los recursos actualizados en la BD
 
                     //REALIZAR EXPERIMENTOS ISLA
                     //REALIZAR DONACIONES ISLA
@@ -79,10 +92,26 @@ public class HiloPrincipal extends Thread {
             } catch (InterruptedException ex) {
                 Logger.getLogger(HiloPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println("Error con los sleep del hilo principal");
+            } catch (SQLException ex) {
+                Logger.getLogger(HiloPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
 
+    }
+    
+    
+    
+    private void actualizarRecursos(Ciudad miCiudad) throws SQLException {
+        sql = "update ciudades set"
+                + " madera_ciu = " + miCiudad.getMaderaCiu() 
+                + ", vino_ciu = " + miCiudad.getVinoCiu()
+                + ", marmol_ciu = " + miCiudad.getMarmolCiu()
+                + ", cristal_ciu = " + miCiudad.getCristalCiu()
+                + ", azufre_ciu = " + miCiudad.getAzufreCiu()
+                + " where id_ciu = " + miCiudad.getIdCiudad();
+ 
+        bd.actualizarTabla(sql);
     }
 
 }
