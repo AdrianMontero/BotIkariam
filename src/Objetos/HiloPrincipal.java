@@ -28,6 +28,7 @@ public class HiloPrincipal extends Thread {
     //Clases de gestion
     Bot miBot = new Bot();
     Ciudad gestorCiudades = new Ciudad();
+    Edificio gestorEdificios = new Edificio();
     WebDriver driverClassHP = JFPrincipal.driverFull;
 
     //Metodos para interactuar con la BD
@@ -59,19 +60,32 @@ public class HiloPrincipal extends Thread {
 
                     miCiudad = miCiudad.getInfoCity();//Guardamos la informacion de la isla (recursos, nombre y coordenadas)
                     miCiudad.setIdCiudad(i); //Asignamos el id a la ciudad
-                    
+
+                    //ACTUALIZACION DE RECURSOS
+                    actualizarRecursos(miCiudad); //Guardamos los recursos actualizados en la BD
+
                     //ACTUALIZAR EDIFICIOS ISLA
                     miBot.mostrarCiudad(); //Nos posicionamos en la ciudad para hacer las comprobaciones de los edificios.
                     System.out.println("Estoy en la ciudad  " + miCiudad.getNombreCiu());
-                    
-//                    ArrayList<Ciudad> misCiudades = new ArrayList();
-//                    misCiudades = Ciudad.ListCitiesPlayerBD();
-//                    for(int j = 0; j < misCiudades.size();i++){
-//                    }
+
+                    //Obtenemos los edificios de la BD
                     ArrayList<Edificio> misEdificios = new ArrayList(); //Constiene los edificios a construir almacenados en la BD
                     misEdificios = miBot.getEdificiosPorCiudad(i); //Conseguimos la lista de edificios por ciudad de la BD
-                    
-                    actualizarRecursos(miCiudad); //Guardamos los recursos actualizados en la BD
+                    //Comprobamos 1x1 si se pueden subir (en caso de que el primero no se pueda se pasa a comprobar los edificios de la siguiente isla).
+                    for (Edificio miEdificio : misEdificios) {
+                        WebElement btnIkaEdi = driverClassHP.findElement(By.id(miEdificio.getPosIkaEdi()));
+                        Thread.sleep(1000);
+                        btnIkaEdi.click();
+                        Thread.sleep(1000);
+                        WebElement btnUpdate = driverClassHP.findElement(By.id("js_buildingUpgradeButton"));
+                        if (btnUpdate.getAttribute("class").equals("action_btn disabled")) { //En caso de que este "disabled" no se puede subir, asi que no hacemos nada y pasamos a la siguiente isla
+                            //No hacemos nada
+                        } else { //Si el boton no esta bloqueado
+                            btnUpdate.click(); //Lo pulsamos para subir el edificio
+                            gestorEdificios.eliminarEdificioBD(miCiudad.getIdCiudad(), miEdificio.getNombreEdificio()); //Si lo actualizamos hay que borrar el edificio de la BD
+                        }
+                        break; //Solo queremos que actualize el primer edificio de la lista
+                    }
 
                     //REALIZAR EXPERIMENTOS ISLA
                     //REALIZAR DONACIONES ISLA
@@ -99,18 +113,16 @@ public class HiloPrincipal extends Thread {
         }
 
     }
-    
-    
-    
+
     private void actualizarRecursos(Ciudad miCiudad) throws SQLException {
         sql = "update ciudades set"
-                + " madera_ciu = " + miCiudad.getMaderaCiu() 
+                + " madera_ciu = " + miCiudad.getMaderaCiu()
                 + ", vino_ciu = " + miCiudad.getVinoCiu()
                 + ", marmol_ciu = " + miCiudad.getMarmolCiu()
                 + ", cristal_ciu = " + miCiudad.getCristalCiu()
                 + ", azufre_ciu = " + miCiudad.getAzufreCiu()
                 + " where id_ciu = " + miCiudad.getIdCiudad();
- 
+
         bd.actualizarTabla(sql);
     }
 
