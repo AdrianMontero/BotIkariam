@@ -49,12 +49,8 @@ public class JFPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jmiEdificios = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jmiTablaRecursos = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
 
         jMenu6.setText("jMenu6");
@@ -81,28 +77,15 @@ public class JFPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Ejercito");
-
-        jMenuItem1.setText("Creacion de Ejercito");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem1);
-
-        jMenuItem2.setText("Gestor de Ataques");
-        jMenu3.add(jMenuItem2);
-
-        jMenuBar1.add(jMenu3);
-
         jMenu4.setText("Recursos");
 
-        jMenuItem3.setText("Gestor de rutas comerciales");
-        jMenu4.add(jMenuItem3);
-
-        jMenuItem4.setText("Donaciones");
-        jMenu4.add(jMenuItem4);
+        jmiTablaRecursos.setText("Tabla de recursos");
+        jmiTablaRecursos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiTablaRecursosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jmiTablaRecursos);
 
         jMenuItem5.setText("Autoexperimentos");
         jMenu4.add(jMenuItem5);
@@ -113,10 +96,6 @@ public class JFPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
 
@@ -132,6 +111,12 @@ public class JFPrincipal extends javax.swing.JFrame {
         }
         this.setContentPane(jPEdificios);
     }//GEN-LAST:event_jmiEdificiosActionPerformed
+
+    private void jmiTablaRecursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiTablaRecursosActionPerformed
+        JPRecursos jpRecursos = null;
+        jpRecursos = new JPRecursos();
+        this.setContentPane(jpRecursos);
+    }//GEN-LAST:event_jmiTablaRecursosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,15 +156,11 @@ public class JFPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jmiEdificios;
+    private javax.swing.JMenuItem jmiTablaRecursos;
     // End of variables declaration//GEN-END:variables
 }
