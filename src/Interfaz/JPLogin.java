@@ -52,6 +52,7 @@ public class JPLogin extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel6 = new javax.swing.JLabel();
         jlUserLog = new javax.swing.JLabel();
         jtfUserLog = new javax.swing.JTextField();
         jlPassLog = new javax.swing.JLabel();
@@ -59,62 +60,133 @@ public class JPLogin extends javax.swing.JPanel {
         jbntConectarLog = new javax.swing.JButton();
         jlServerLog = new javax.swing.JLabel();
         jcbServerList = new javax.swing.JComboBox<>();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
+        jLabel6.setText("Ataques automatizados");
+
+        setBackground(new java.awt.Color(58, 56, 77));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jlUserLog.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jlUserLog.setText("Usuario");
+        add(jlUserLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, -1, -1));
+        add(jtfUserLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 200, 30));
 
+        jlPassLog.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jlPassLog.setText("Contraseña");
+        add(jlPassLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, -1, -1));
+        add(jtfPassLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, 200, 30));
 
+        jbntConectarLog.setBackground(new java.awt.Color(102, 0, 51));
+        jbntConectarLog.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jbntConectarLog.setText("Conectar");
         jbntConectarLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbntConectarLogActionPerformed(evt);
             }
         });
+        add(jbntConectarLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, 300, 40));
 
+        jlServerLog.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jlServerLog.setText("Servidor");
+        add(jlServerLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(216, 216, 216)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfUserLog)
-                            .addComponent(jtfPassLog)
-                            .addComponent(jbntConectarLog, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlServerLog)
-                                    .addComponent(jlUserLog)))
-                            .addComponent(jcbServerList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(237, 237, 237)
-                        .addComponent(jlPassLog)))
-                .addContainerGap(268, Short.MAX_VALUE))
+        add(jcbServerList, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, 200, 40));
+
+        jPanel2.setBackground(new java.awt.Color(38, 40, 55));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("0.2");
+
+        jLabel2.setFont(new java.awt.Font("Open Sans Condensed", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("IkaBot");
+
+        jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Subida automatizada de edificios");
+
+        jLabel4.setFont(new java.awt.Font("Open Sans Condensed", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Próximas Funcionalidades");
+
+        jSeparator2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Ataques automatizados");
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Donaciones automáticas");
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Visión de recursos general");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1))
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addComponent(jlServerLog)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jcbServerList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addComponent(jlUserLog)
+                .addComponent(jLabel8)
+                .addGap(49, 49, 49)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtfUserLog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jlPassLog)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtfPassLog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jbntConectarLog)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addComponent(jLabel7)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
+
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 352));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbntConectarLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbntConectarLogActionPerformed
@@ -176,12 +248,12 @@ public class JPLogin extends javax.swing.JPanel {
         WebElement btnLogin = driverLog.findElement(By.id("loginBtn"));
 
         //Asignacion de parametros del usuario con elementos de la web
-        //select.selectByIndex(servSelecIndex);
-        select.selectByIndex(11);
-        //UserLog.sendKeys(jtfUserLog.getText());
-        UserLog.sendKeys("blizzartess");
-        //PassLog.sendKeys(jtfPassLog.getText());
-        PassLog.sendKeys("");
+        select.selectByIndex(servSelecIndex);
+        //select.selectByIndex(11);
+        UserLog.sendKeys(jtfUserLog.getText());
+        //UserLog.sendKeys("blizzartess");
+        PassLog.sendKeys(jtfPassLog.getText());
+        //PassLog.sendKeys("");
 
         //Entrando
         btnLogin.click();
@@ -214,6 +286,17 @@ public class JPLogin extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton jbntConectarLog;
     private javax.swing.JComboBox<String> jcbServerList;
     private javax.swing.JLabel jlPassLog;

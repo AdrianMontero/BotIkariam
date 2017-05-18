@@ -31,7 +31,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         driverFull = new ChromeDriver(options);
         initComponents();
         JPLogin jpLogin = new JPLogin();
-        this.setBounds(100,100,600,500);
+        this.setBounds(100,500,700,370);
         this.getContentPane().add(jpLogin);
     }
 
@@ -45,22 +45,22 @@ public class JFPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu6 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jmiEdificios = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
         jmiTablaRecursos = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jmiSalir = new javax.swing.JMenuItem();
 
         jMenu6.setText("jMenu6");
 
+        jMenuItem1.setText("jMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
-        jMenu1.setText("Login");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Gestor edificios");
+        jMenu2.setText("Bot");
         jMenu2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu2ActionPerformed(evt);
@@ -75,20 +75,25 @@ public class JFPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jmiEdificios);
 
-        jMenuBar1.add(jMenu2);
-
-        jMenu4.setText("Recursos");
-
         jmiTablaRecursos.setText("Tabla de recursos");
         jmiTablaRecursos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiTablaRecursosActionPerformed(evt);
             }
         });
-        jMenu4.add(jmiTablaRecursos);
+        jMenu2.add(jmiTablaRecursos);
 
-        jMenuItem5.setText("Autoexperimentos");
-        jMenu4.add(jMenuItem5);
+        jMenuBar1.add(jMenu2);
+
+        jMenu4.setText("Salir");
+
+        jmiSalir.setText("Salir");
+        jmiSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSalirActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jmiSalir);
 
         jMenuBar1.add(jMenu4);
 
@@ -117,6 +122,11 @@ public class JFPrincipal extends javax.swing.JFrame {
         jpRecursos = new JPRecursos();
         this.setContentPane(jpRecursos);
     }//GEN-LAST:event_jmiTablaRecursosActionPerformed
+
+    private void jmiSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSalirActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jmiSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,13 +164,13 @@ public class JFPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jmiEdificios;
+    private javax.swing.JMenuItem jmiSalir;
     private javax.swing.JMenuItem jmiTablaRecursos;
     // End of variables declaration//GEN-END:variables
 }
