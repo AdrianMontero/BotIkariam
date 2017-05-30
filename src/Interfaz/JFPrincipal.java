@@ -7,6 +7,7 @@ package Interfaz;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,6 +25,7 @@ public class JFPrincipal extends javax.swing.JFrame {
      * Creates new form JFPrincipal
      */
     public JFPrincipal() {
+        
         // Optional, if not specified, WebDriver will search your path for chromedriver.
         System.setProperty("webdriver.chrome.driver", "C:\\SeleniumDrivers\\chromedriver.exe");
 
@@ -33,6 +35,7 @@ public class JFPrincipal extends javax.swing.JFrame {
 
         driverFull = new ChromeDriver(options);
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/ikariam.png")).getImage());
         JPLogin jpLogin = new JPLogin();
         this.setBounds(100, 500, 700, 370);
         this.getContentPane().add(jpLogin);
