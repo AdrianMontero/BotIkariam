@@ -15,19 +15,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-
-
 /**
  *
  * @author ADRIAN
  */
 public class Ciudad {
+
     WebDriver driverClassciu = JFPrincipal.driverFull;
     //Metodos para interactuar con la BD
     private static CoreBD bd = new CoreBD(); //Variable usada para interactuar con la BD
     private static String sql = null; //Variable usada para contener los mensajes sql para interactuar con la BD
     private static ResultSet rs = null; //Variable que almacena los resultados devueltos por la BD
-    
+
     //Atributos
     private int idCiudad;
     private String nombreCiu;
@@ -96,8 +95,11 @@ public class Ciudad {
     }
 
     /**
-     * Metodo que guarda una ciudad en la base de datos usando el metodo "stockCityBD.
-     * @param nCiudadEnDesplegable Posicion en el menu desplegable de la ciudad que vamos a mirar
+     * Metodo que guarda una ciudad en la base de datos usando el metodo
+     * "stockCityBD.
+     *
+     * @param nCiudadEnDesplegable Posicion en el menu desplegable de la ciudad
+     * que vamos a mirar
      * @throws InterruptedException Error con el sleep al mirar la ciudad
      */
     public void stockCity(int nCiudadEnDesplegable) throws InterruptedException, SQLException {
@@ -115,7 +117,7 @@ public class Ciudad {
         islas.get(nCiudadEnDesplegable).click();
         Thread.sleep(1000);
         miCiudad = getInfoCity();//Guardamos la informacion de la isla
-        
+
         //Guardamos la informacion de la ciudad en la BD
         stockCityBD(miCiudad);
     }
@@ -237,7 +239,7 @@ public class Ciudad {
         }
         return misCiudades;
     }
-    
+
     //Getters y setters
     public int getIdCiudad() {
         return idCiudad;
@@ -312,6 +314,19 @@ public class Ciudad {
     }
 
     //Constructores
+    /**
+     * Constructor completo para la ciudad
+     *
+     * @param idCiudad id de la ciudad
+     * @param nombreCiu Nombre de la ciudad
+     * @param coordXCiu Coordenada x de la ciudad
+     * @param coordYCiu Coordenada y de la ciudad
+     * @param maderaCiu Madera en la ciudad
+     * @param vinoCiu Vino en la ciudad
+     * @param marmolCiu Marmol en la ciudad
+     * @param cristalCiu Cristal en la ciudad
+     * @param azufreCiu Azufre en la ciudad
+     */
     public Ciudad(int idCiudad, String nombreCiu, int coordXCiu, int coordYCiu, int maderaCiu, int vinoCiu, int marmolCiu, int cristalCiu, int azufreCiu) {
         this.idCiudad = idCiudad;
         this.nombreCiu = nombreCiu;
@@ -324,6 +339,18 @@ public class Ciudad {
         this.azufreCiu = azufreCiu;
     }
 
+    /**
+     * Constructor sin id
+     *
+     * @param nombreCiu Nombre de la ciudad
+     * @param coordXCiu Coordenada x de la ciudad
+     * @param coordYCiu Coordenada y de la ciudad
+     * @param maderaCiu Madera en la ciudad
+     * @param vinoCiu Vino en la ciudad
+     * @param marmolCiu Marmol en la ciudad
+     * @param cristalCiu Cristal en la ciudad
+     * @param azufreCiu Azufre en la ciudad
+     */
     public Ciudad(String nombreCiu, int coordXCiu, int coordYCiu, int maderaCiu, int vinoCiu, int marmolCiu, int cristalCiu, int azufreCiu) {
         this.nombreCiu = nombreCiu;
         this.coordXCiu = coordXCiu;
@@ -334,9 +361,17 @@ public class Ciudad {
         this.cristalCiu = cristalCiu;
         this.azufreCiu = azufreCiu;
     }
-    
-    
 
+    /**
+     * Constructor solo para guardar los recursos para una ciudad determinada
+     *
+     * @param idCiudad id de la ciudad
+     * @param maderaCiu Madera en la ciudad
+     * @param vinoCiu Vino en la ciudad
+     * @param marmolCiu Marmol en la ciudad
+     * @param cristalCiu Cristal en la ciudad
+     * @param azufreCiu Azufre en la ciudad
+     */
     public Ciudad(int idCiudad, int maderaCiu, int vinoCiu, int marmolCiu, int cristalCiu, int azufreCiu) {
         this.idCiudad = idCiudad;
         this.maderaCiu = maderaCiu;
@@ -346,6 +381,9 @@ public class Ciudad {
         this.azufreCiu = azufreCiu;
     }
 
+    /**
+     * Constructor vacio
+     */
     public Ciudad() {
     }
 

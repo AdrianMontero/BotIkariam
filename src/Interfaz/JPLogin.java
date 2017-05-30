@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,6 +40,7 @@ public class JPLogin extends javax.swing.JPanel {
         try {
             cargarLog();
         } catch (InterruptedException ex) {
+            JOptionPane.showMessageDialog(null, "Error al cargar el login", "Informacion", JOptionPane.INFORMATION_MESSAGE);
             Logger.getLogger(JPLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -197,41 +199,36 @@ public class JPLogin extends javax.swing.JPanel {
         int ciudadesBD;
         int diferenciaCiudadesIkaBD; //Almacena cuantas ciudades de diferencia hay entre la BD e ikariam
 
-        /*try {
-            gestorCiudad.lookCities();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(JPLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-
         //Al inicio capturamos la informacion de todoas las ciudades y edificios de esa ciudad que hay en Ikariam que todavia no estan en la BD          
         try {
             //Vemos cuantas islas hay en la BD y cuantas hay actualmente en ikariam
             ciudadesIkariam = gestorCiudad.askCitiesIka();
             ciudadesBD = gestorCiudad.askNumberCitiesBD();
-            
-            if(ciudadesBD != ciudadesIkariam){
+
+            if (ciudadesBD != ciudadesIkariam) {
                 diferenciaCiudadesIkaBD = ciudadesIkariam - ciudadesBD;
-                for(int i = 0; i < diferenciaCiudadesIkaBD; i++){
-                    ciudadesBD++; 
-                    
+                for (int i = 0; i < diferenciaCiudadesIkaBD; i++) {
+                    ciudadesBD++;
+
                     //Guardamos las ciudades que no tenemos en la BD
                     try {
                         gestorCiudad.stockCity(ciudadesBD); //Guardamos la informacion perteneciente a esa ciudad
                         miBot.setConstruccionesPorCiudad(ciudadesBD); //Guardamos los edificios pertenecientes a esa ciudad
                     } catch (InterruptedException ex) {
+                        JOptionPane.showMessageDialog(null, "Error al conectar con la base de datos", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                         Logger.getLogger(JPLogin.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
-                    
-                } 
+
+                }
             }
-        //Una vez recogida la informacion que faltase perteneciente a las islas le indicamos al hilo principal del programa que empiece
-        new Thread(new HiloPrincipal()).start();
+            //Una vez recogida la informacion que faltase perteneciente a las islas le indicamos al hilo principal del programa que empiece
+            new Thread(new HiloPrincipal()).start();
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectar con la base de datos", "Informacion", JOptionPane.INFORMATION_MESSAGE);
             Logger.getLogger(JPLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
+
     }//GEN-LAST:event_jbntConectarLogActionPerformed
 
     public void conectar() {

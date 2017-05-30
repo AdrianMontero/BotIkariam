@@ -18,6 +18,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -106,7 +107,9 @@ public class HiloPrincipal extends Thread {
             } catch (InterruptedException ex) {
                 Logger.getLogger(HiloPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println("Error con los sleep del hilo principal");
+                JOptionPane.showMessageDialog(null, "Error en la ejecucion del hilo", "Hilo", JOptionPane.INFORMATION_MESSAGE);
             } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error en la conexion de la base de datos con el hilo principal del programa", "Hilo", JOptionPane.INFORMATION_MESSAGE);
                 Logger.getLogger(HiloPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -114,6 +117,13 @@ public class HiloPrincipal extends Thread {
 
     }
 
+    /**
+     * Metodo usado para actualizar los recursos de una ciudad determinada en la
+     * BD
+     *
+     * @param miCiudad Ciudad la cual contiene los recursos actualizados
+     * @throws SQLException Error al conectar con la BD
+     */
     private void actualizarRecursos(Ciudad miCiudad) throws SQLException {
         sql = "update ciudades set"
                 + " madera_ciu = " + miCiudad.getMaderaCiu()

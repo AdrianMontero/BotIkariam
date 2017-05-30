@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,7 +25,7 @@ public class JPRecursos extends javax.swing.JPanel {
      */
     public JPRecursos() {
         initComponents();
-        this.setBounds(0,0,700,370);
+        this.setBounds(0, 0, 700, 370);
     }
 
     /**
@@ -90,14 +91,15 @@ public class JPRecursos extends javax.swing.JPanel {
         ArrayList<Ciudad> misCiudades = new ArrayList();
         modelo = (DefaultTableModel) jtaRecursos.getModel();
         modelo.setRowCount(0);
-        
+
         try { //Cargamos los datos de las ciudades le de BD
             misCiudades = Ciudad.ListCitiesPlayerBD();
             for (Ciudad ciudad : misCiudades) {
                 modelo.addRow(new Object[]{(String) ciudad.getNombreCiu(), (int) ciudad.getMaderaCiu(), (int) ciudad.getVinoCiu(), (int) ciudad.getMarmolCiu(), (int) ciudad.getCristalCiu(), (int) ciudad.getAzufreCiu()}); //Lo agregamos a la caja
             }
-            
+
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectar con la base de datos", "Informacion", JOptionPane.INFORMATION_MESSAGE);
             Logger.getLogger(JPRecursos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbtnActualizarRecActionPerformed

@@ -7,6 +7,7 @@ package Interfaz;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -16,22 +17,24 @@ import org.openqa.selenium.chrome.ChromeOptions;
  * @author ADRIAN
  */
 public class JFPrincipal extends javax.swing.JFrame {
+
     public static WebDriver driverFull;
+
     /**
      * Creates new form JFPrincipal
      */
     public JFPrincipal() {
         // Optional, if not specified, WebDriver will search your path for chromedriver.
         System.setProperty("webdriver.chrome.driver", "C:\\SeleniumDrivers\\chromedriver.exe");
-        
+
         //Hacemos la ventana de chrome grande
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
-        
+
         driverFull = new ChromeDriver(options);
         initComponents();
         JPLogin jpLogin = new JPLogin();
-        this.setBounds(100,500,700,370);
+        this.setBounds(100, 500, 700, 370);
         this.getContentPane().add(jpLogin);
     }
 
@@ -107,12 +110,13 @@ public class JFPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void jmiEdificiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEdificiosActionPerformed
-        
+
         JPEdificios jPEdificios = null;
         try {
             jPEdificios = new JPEdificios();
         } catch (InterruptedException ex) {
             Logger.getLogger(JFPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al instanciar el panel de edificios", "Informacion", JOptionPane.INFORMATION_MESSAGE);
         }
         this.setContentPane(jPEdificios);
     }//GEN-LAST:event_jmiEdificiosActionPerformed
