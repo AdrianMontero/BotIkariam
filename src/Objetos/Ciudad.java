@@ -232,7 +232,7 @@ public class Ciudad {
             miCiudad.setVinoCiu(rs2.getInt("vino_ciu"));
             miCiudad.setMarmolCiu(rs2.getInt("marmol_ciu"));
             miCiudad.setCristalCiu(rs2.getInt("cristal_ciu"));
-            miCiudad.setCristalCiu(rs2.getInt("azufre_ciu"));
+            miCiudad.setAzufreCiu(rs2.getInt("azufre_ciu"));
             misCiudades.add(miCiudad);
         }
         return misCiudades;
